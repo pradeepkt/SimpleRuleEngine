@@ -1,0 +1,26 @@
+/**
+ * 
+ */
+package com.simpleruleengine;
+
+/**
+ * @author z0027pb
+ *
+ */
+public enum Operators {
+	NUM_GREATER_THAN,
+	NUM_GREATER_THAN_OR_EQUAL,
+	NUM_LESSER_THAN,
+	NUM_LESSER_THAN_OR_EQUAL,
+	NUM_EQUAL,
+	
+	STR_EQUAL,
+	STR_CONTAINS,
+	STR_DOES_NOT_CONTAIN,
+	
+	DATE_EQUAL,
+	DATE_EARLIER_THAN,
+	DATE_EARLIER_THAN_OR_EQUAL,
+	DATE_LATER_THAN,
+	DATE_LATER_THAN_OR_EQUAL
+}

@@ -9,6 +9,6 @@ package com.simpleruleengine;
  */
 public interface BasicRuleEngine {
 	
-	public boolean compare(Object val1, Object val2, int operation);
-
+	public boolean compare(Object val1, Object val2, Operators operation);
+	
 }
