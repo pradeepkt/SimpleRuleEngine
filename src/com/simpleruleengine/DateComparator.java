@@ -17,10 +17,11 @@ public class DateComparator implements BasicRuleEngine {
 	@Override
 	public boolean compare(Object val1, Object val2, Operators operation) {
 		
-		if (!val1.getClass().isInstance(Date.class) || !val2.getClass().isInstance(Date.class))
+		if (!(val1 instanceof Date) || !(val2 instanceof Date))
 		{
 			// Type check for the LHS and RHS
-			//return false;
+			System.out.println("This is NOT Date");
+			return false;
 		}
 		switch (operation)
 		{

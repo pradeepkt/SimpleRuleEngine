@@ -15,10 +15,11 @@ public final class NumericComparator implements BasicRuleEngine {
 	@Override
 	public boolean compare(Object val1, Object val2, Operators operation) {
 		
-		if (!val1.getClass().isInstance(Number.class) || !val2.getClass().isInstance(Number.class))
+		if (!(val1 instanceof Number) || !(val2 instanceof Number))
 		{
 			// Type check for the LHS and RHS
-			//return false;
+			System.out.println("This is NOT Number");
+			return false;
 		}
 		switch (operation)
 		{

@@ -29,9 +29,7 @@ public class SimpleRuleEngineUnitTest {
 		Object val1;
 		Object val2;
 		val1 = new Integer(23);
-		val2 = new Integer(24);
-		System.out.println("val1 class is " + val1.getClass().toString()) ;
-		System.out.println("val2 class is " + val2.getClass().toString()) ;
+		val2 = new Integer(26);
 		bre = new NumericComparator();
 		if (bre.compare(val1, val2, Operators.NUM_EQUAL))
 		{
@@ -56,8 +54,6 @@ public class SimpleRuleEngineUnitTest {
 
 		val1 = new String("Tester");
 		val2 = new String("Test");
-		System.out.println("val1 class is " + val1.getClass().toString()) ;
-		System.out.println("val2 class is " + val2.getClass().toString()) ;
 		bre = new StringComparator();
 		if (bre.compare(val1, val2, Operators.STR_CONTAINS))
 		{
@@ -74,8 +70,6 @@ public class SimpleRuleEngineUnitTest {
 		
 		val1 = new Date(1473609189);
 		val2 = new Date(1441986789);
-		System.out.println("val1 class is " + val1.getClass().toString()) ;
-		System.out.println("val2 class is " + val2.getClass().toString()) ;
 		bre = new DateComparator();
 		if (bre.compare(val1, val2, Operators.DATE_EARLIER_THAN))
 		{

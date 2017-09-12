@@ -15,15 +15,11 @@ public class StringComparator implements BasicRuleEngine {
 	@Override
 	public boolean compare(Object val1, Object val2, Operators operation) {
 
-		if (val1.getClass().isInstance(String.class))
+		if (!(val1 instanceof String)) // (val1.getClass().isInstance(String.class))
 		{
 			// Type check for the LHS and RHS
-			System.out.println("This is string");
-			//return false;
-		}
-		else
-		{
-			System.out.println("This is not string");
+			System.out.println("This is NOT string");
+			return false;
 		}
 		switch (operation)
 		{
