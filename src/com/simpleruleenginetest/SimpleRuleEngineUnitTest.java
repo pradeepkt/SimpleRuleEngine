@@ -1,10 +1,12 @@
 /**
  * 
  */
+
 package com.simpleruleenginetest;
 import java.util.Date;
 
 import com.simpleruleengine.*;
+import com.simpleruleengine.utils.DBConnectionManager;
 
 /**
  * @author z0027pb
@@ -92,6 +94,10 @@ public class SimpleRuleEngineUnitTest {
 			System.out.println(val1.toString() + " is later than or equal to " + val2.toString());
 		}
 		
+		RuleManager rules = new RuleManager();
+		rules.displayRules();
+		rules.AddRule("attr3", Operators.DATE_EQUAL, "300");
+		rules.displayRules();
 	}
 
 }
