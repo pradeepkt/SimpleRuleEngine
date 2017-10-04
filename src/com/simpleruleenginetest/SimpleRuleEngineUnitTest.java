@@ -27,77 +27,31 @@ public class SimpleRuleEngineUnitTest {
 	
 	public void unitTest()
 	{
-		BasicRuleEngine bre;
-		Object val1;
-		Object val2;
-		val1 = new Integer(23);
-		val2 = new Integer(26);
-		bre = new NumericComparator();
-		if (bre.compare(val1, val2, Operators.NUM_EQUAL))
-		{
-			System.out.println(val1.toString() + " is equal to " + val2.toString());
-		}
-		if (bre.compare(val1, val2, Operators.NUM_GREATER_THAN))
-		{
-			System.out.println(val1.toString() + " is greater than " + val2.toString());
-		}
-		if (bre.compare(val1, val2, Operators.NUM_GREATER_THAN_OR_EQUAL))
-		{
-			System.out.println(val1.toString() + " is greater than or equal to " + val2.toString());
-		}
-		if (bre.compare(val1, val2, Operators.NUM_LESSER_THAN))
-		{
-			System.out.println(val1.toString() + " is lesser than " + val2.toString());
-		}
-		if (bre.compare(val1, val2, Operators.NUM_LESSER_THAN_OR_EQUAL))
-		{
-			System.out.println(val1.toString() + " is lesser than or equal to " + val2.toString());
-		}
 
-		val1 = new String("Tester");
-		val2 = new String("Test");
-		bre = new StringComparator();
-		if (bre.compare(val1, val2, Operators.STR_CONTAINS))
-		{
-			System.out.println(val1.toString() + " contains " + val2.toString());
-		}
-		if (bre.compare(val1, val2, Operators.STR_DOES_NOT_CONTAIN))
-		{
-			System.out.println(val1.toString() + " does not contain " + val2.toString());
-		}
-		if (bre.compare(val1, val2, Operators.STR_EQUAL))
-		{
-			System.out.println(val1.toString() + " equals " + val2.toString());
-		}
-		
-		val1 = new Date(1473609189);
-		val2 = new Date(1441986789);
-		bre = new DateComparator();
-		if (bre.compare(val1, val2, Operators.DATE_EARLIER_THAN))
-		{
-			System.out.println(val1.toString() + " is earlier than " + val2.toString());
-		}
-		if (bre.compare(val1, val2, Operators.DATE_EARLIER_THAN_OR_EQUAL))
-		{
-			System.out.println(val1.toString() + " is earlier than or equal " + val2.toString());
-		}
-		if (bre.compare(val1, val2, Operators.DATE_EQUAL))
-		{
-			System.out.println(val1.toString() + " is equal to " + val2.toString());
-		}
-		if (bre.compare(val1, val2, Operators.DATE_LATER_THAN))
-		{
-			System.out.println(val1.toString() + " is later than " + val2.toString());
-		}
-		if (bre.compare(val1, val2, Operators.DATE_LATER_THAN_OR_EQUAL))
-		{
-			System.out.println(val1.toString() + " is later than or equal to " + val2.toString());
-		}
+		// Clear the Rules Table
+		DBConnectionManager.persist("TRUNCATE `RuleDB`.`Rules`;");
 		
 		RuleManager rules = new RuleManager();
-		rules.displayRules();
-		rules.AddRule("attr3", Operators.DATE_EQUAL, "300");
-		rules.displayRules();
+		
+		// Add Number comparison rules.
+		rules.AddRule(new Rule(0,"attr1", Operators.NUM_EQUAL, new Long(300L)));
+		rules.AddRule(new Rule(0,"attr2", Operators.NUM_GREATER_THAN, new Long(300L)));
+		rules.AddRule(new Rule(0,"attr3", Operators.NUM_GREATER_THAN_OR_EQUAL, new Long(300L)));
+		rules.AddRule(new Rule(0,"attr4", Operators.NUM_LESSER_THAN, new Long(300L)));
+		rules.AddRule(new Rule(0,"attr5", Operators.NUM_LESSER_THAN_OR_EQUAL, new Long(300L)));
+
+		// Add String comparison rules.
+		rules.AddRule(new Rule(0,"attr6", Operators.STR_CONTAINS, "TestString"));
+		rules.AddRule(new Rule(0,"attr7", Operators.STR_DOES_NOT_CONTAIN, "TestString"));
+		rules.AddRule(new Rule(0,"attr8", Operators.STR_EQUAL, "TestString"));
+		
+		// Add Date comparison rules.
+		rules.AddRule(new Rule(0,"attr9", Operators.DATE_EARLIER_THAN, new Date(1500748200000L)));
+		rules.AddRule(new Rule(0,"attr9", Operators.DATE_EARLIER_THAN_OR_EQUAL, new Date(1500748200000L)));
+		rules.AddRule(new Rule(0,"attr9", Operators.DATE_EQUAL, new Date(1500748200000L)));
+		rules.AddRule(new Rule(0,"attr9", Operators.DATE_LATER_THAN, new Date(1500748200000L)));
+		rules.AddRule(new Rule(0,"attr9", Operators.DATE_LATER_THAN_OR_EQUAL, new Date(1500748200000L)));
+
 	}
 
 }

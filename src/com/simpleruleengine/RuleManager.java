@@ -57,6 +57,14 @@ public class RuleManager {
 		_ruleSet.put(maxID+1,rule);
 	}
 	
+	public void AddRule(Rule newRule)
+	{
+		long maxID = getMaxId();
+		newRule.setId(maxID+1);
+		persist(newRule);
+		_ruleSet.put(maxID+1,newRule);
+	}
+	
 	/**
 	 * Returns the max Id
 	 * @return

@@ -23,6 +23,7 @@ public class DateComparator implements BasicRuleEngine {
 			System.out.println("This is NOT Date");
 			return false;
 		}
+		System.out.println("Comparing " + ((Date)val1).toString() + " & " + ((Date)val2).toString());
 		switch (operation)
 		{
 		case DATE_EARLIER_THAN:

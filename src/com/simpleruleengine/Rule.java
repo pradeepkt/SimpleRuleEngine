@@ -17,6 +17,10 @@ public final class Rule {
 	{
 		return _id;
 	}
+	public void setId(long id)
+	{
+		_id = id;
+	}
 	
 	
 	/**
@@ -81,6 +85,37 @@ public final class Rule {
 		_attrName = new String();
 		_oper = Operators.INVALID;
 		_threshold = new Object();
+	}
+	
+	public boolean evaluateRule(Object compare)
+	{
+		BasicRuleEngine engine;
+		int operCode = _oper.getCode();
+		switch (operCode)
+		{
+			case 10:
+			case 11:
+			case 12:
+			case 13:
+			case 14:
+				engine = new NumericComparator();
+				break;
+			case 20:
+			case 21:
+			case 22:
+				engine = new StringComparator();
+				break;
+			case 30:
+			case 31:
+			case 32:
+			case 33:
+			case 34:
+				engine = new DateComparator();
+				break;
+			default:
+				return false;
+		}
+		return engine.compare(compare, _threshold, _oper);
 	}
 
 }

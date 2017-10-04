@@ -4,11 +4,11 @@
 package com.simpleruleengine.utils;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
 import java.util.Hashtable;
 
 import com.simpleruleengine.Operators;
@@ -21,48 +21,6 @@ import com.simpleruleengine.Rule;
 public class DBConnectionManager {
     // JDBC driver name and database URL
 	
-	/**
-	 * Returns the operator
-	 * @param strCode
-	 * @return
-	 */
-	private static Operators getOperator(String strCode)
-	{
-		switch(strCode)
-		{
-		case "INVALID":
-			return Operators.INVALID;
-		case "NUM_GREATER_THAN":
-			return Operators.NUM_GREATER_THAN;
-		case "NUM_GREATER_THAN_OR_EQUAL":
-			return Operators.NUM_GREATER_THAN_OR_EQUAL;
-		case "NUM_LESSER_THAN":
-			return Operators.NUM_LESSER_THAN;
-		case "NUM_LESSER_THAN_OR_EQUAL":
-			return Operators.NUM_LESSER_THAN_OR_EQUAL;
-		case "NUM_EQUAL":
-			return Operators.NUM_EQUAL;
-		case "STR_EQUAL":
-			return Operators.STR_EQUAL;
-		case "STR_CONTAINS":
-			return Operators.STR_CONTAINS;
-		case "STR_DOES_NOT_CONTAIN":
-			return Operators.STR_DOES_NOT_CONTAIN;
-		case "DATE_EQUAL":
-			return Operators.DATE_EQUAL;
-		case "DATE_EARLIER_THAN":
-			return Operators.DATE_EARLIER_THAN;
-		case "DATE_EARLIER_THAN_OR_EQUAL":
-			return Operators.DATE_EARLIER_THAN_OR_EQUAL;
-		case "DATE_LATER_THAN":
-			return Operators.DATE_LATER_THAN;
-		case "DATE_LATER_THAN_OR_EQUAL":
-			return Operators.DATE_LATER_THAN_OR_EQUAL;
-		default:
-			return Operators.INVALID;
-		}
-
-	}
 
 
     /**
@@ -154,6 +112,7 @@ public class DBConnectionManager {
                 int oper = rs.getInt("Operation");
                 String thresh = rs.getString("Threshold_Val");
                 long phone = rs.getLong("IsNull");
+                Object threshold_value;
                 
                 //Display values
                 System.out.print("idRules: " + id);
@@ -161,7 +120,31 @@ public class DBConnectionManager {
                 System.out.print(", Operation: " + oper);
                 System.out.print(", Threshold_Val: " + thresh);
                 System.out.print(", IsNull: " + phone);
-                listOfRules.put((long)id, new Rule(id, name, Operators.fromInteger(oper), (Object)thresh));
+        		switch (oper)
+        		{
+        			case 10:
+        			case 11:
+        			case 12:
+        			case 13:
+        			case 14:
+        				threshold_value = new Long(thresh);
+        				break;
+        			case 20:
+        			case 21:
+        			case 22:
+        				threshold_value = new String(thresh);
+        				break;
+        			case 30:
+        			case 31:
+        			case 32:
+        			case 33:
+        			case 34:
+        				threshold_value = new Date(Long.parseLong(thresh));
+        				break;
+        			default:
+        				return null;
+        		}
+                listOfRules.put((long)id, new Rule(id, name, Operators.fromInteger(oper), (Object)threshold_value));
             }
             //STEP 6: Clean-up environment
             rs.close();
