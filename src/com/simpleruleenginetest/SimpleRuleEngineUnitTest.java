@@ -3,10 +3,11 @@
  */
 
 package com.simpleruleenginetest;
-import java.util.ArrayList;
 import java.util.Date;
 
-import com.simpleruleengine.*;
+import com.simpleruleengine.Operators;
+import com.simpleruleengine.Rule;
+import com.simpleruleengine.RuleManager;
 import com.simpleruleengine.utils.Constants;
 import com.simpleruleengine.utils.DBConnectionManager;
 
@@ -56,20 +57,30 @@ public class SimpleRuleEngineUnitTest {
 		rules.AddRule(new Rule(0,"myatr12", Operators.DATE_LATER_THAN, new Date(1500748200000L)));
 		rules.AddRule(new Rule(0,"myatr13", Operators.DATE_LATER_THAN_OR_EQUAL, new Date(1500748200000L)));
 
-		//rules.displayRules();
+		rules.displayRules();
 		
+		/*
 		ArrayList<Rule> rulesbyname = rules.getRulesByName("myatr");
 		System.out.println("Rules matching myatr");
 		for (Rule currentRule: rulesbyname)
 		{
 			currentRule.displayRule();
 		}
-		ArrayList<Rule> rulesbyop = rules.getRulesByOperator(Operators.DATE_EARLIER_THAN);
+		ArrayList<Rule> rulesbyop = rules.getRulesByOperator(Operators.DATE_EQUAL);
 		System.out.println("Rules matching myatr");
 		for (Rule currentRule: rulesbyop)
 		{
 			currentRule.displayRule();
+			if (currentRule.evaluateRule(new Date(1500748200000L)))
+			{
+				System.out.println("True");
+			}
+			else
+			{
+				System.out.println("False");
+			}
 		}
+		*/
 
 	}
 

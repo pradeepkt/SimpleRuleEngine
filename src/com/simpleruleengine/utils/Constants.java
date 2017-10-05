@@ -29,7 +29,7 @@ public final class Constants {
     public static final String DB_USER = "root";
     public static final String DB_PASS = "root";
     
-    // Queries
+    // Queries meant only for unit test
     public static final String DB_TABLE_DROP_QUERY = "DROP TABLE `RuleDB`.`Rules`;";
     public static final String DB_TABLE_CREATE_QUERY = "CREATE TABLE `Rules` ( "
 			+ "`idRules` int(11) NOT NULL, "
@@ -37,7 +37,11 @@ public final class Constants {
 			+ "`Operation` int(10) NOT NULL, "
 			+ "`Threshold_Val` varchar(256) NOT NULL, "
 			+ "`IsNull` int(11) DEFAULT NULL, "
-			+ " PRIMARY KEY (`idRules`)"
+			+ " `creator` varchar(256) DEFAULT NULL,"
+			+ " `createdAt` datetime DEFAULT NULL,"
+			+ " `lastUpdatedAt` datetime DEFAULT NULL, "
+			+ " `lastUpdatedBy` varchar(256) DEFAULT NULL, "
+			+ "PRIMARY KEY (`idRules`)"
 			+ ") ENGINE=InnoDB DEFAULT CHARSET=latin1;";
     public static final String DB_TABLE_TRUNCATE_QUERY = "TRUNCATE `RuleDB`.`Rules`;";
 }

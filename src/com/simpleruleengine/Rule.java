@@ -3,6 +3,8 @@
  */
 package com.simpleruleengine;
 
+import java.sql.Date;
+
 /**
  * @author z0027pb
  *
@@ -12,7 +14,7 @@ public final class Rule {
 	/**
 	 * ID
 	 */
-	private long _id;
+	private long _id = -1;
 	public long getId()
 	{
 		return _id;
@@ -62,6 +64,58 @@ public final class Rule {
 		_threshold = thresh;
 	}
 	
+	/**
+	 * Created by - User.name
+	 */
+	private String _createdBy;
+	public String getCreatedBy()
+	{
+		return _createdBy;
+	}
+	public void setCreatedBy(String userName)
+	{
+		_createdBy = userName;
+	}
+	
+	/**
+	 * Created Date for this rule
+	 */
+	private Date _createdDate;
+	public Date getCreatedDate()
+	{
+		return _createdDate;
+	}
+	public void setCreatedDate(Date createdDate)
+	{
+		_createdDate = createdDate;
+	}
+
+	/**
+	 * Last Modified by - User.name
+	 */
+	private String _lastModifiedBy;
+	public String getLastModifiedBy()
+	{
+		return _lastModifiedBy;
+	}
+	public void setLastModifiedBy(String userName)
+	{
+		_lastModifiedBy = userName;
+	}
+	
+	/**
+	 * last Modified Date for this rule
+	 */
+	private Date _lastModifiedDate;
+	public Date getLastModifiedDate()
+	{
+		return _lastModifiedDate;
+	}
+	public void setLastModifiedDate(Date lastModifiedDate)
+	{
+		_lastModifiedDate = lastModifiedDate;
+	}
+		
 	/**
 	 * Constructor
 	 * @param attr
