@@ -28,4 +28,16 @@ public final class Constants {
     //  Database credentials
     public static final String DB_USER = "root";
     public static final String DB_PASS = "root";
+    
+    // Queries
+    public static final String DB_TABLE_DROP_QUERY = "DROP TABLE `RuleDB`.`Rules`;";
+    public static final String DB_TABLE_CREATE_QUERY = "CREATE TABLE `Rules` ( "
+			+ "`idRules` int(11) NOT NULL, "
+			+ "`Attr_name` varchar(256) NOT NULL,"
+			+ "`Operation` int(10) NOT NULL, "
+			+ "`Threshold_Val` varchar(256) NOT NULL, "
+			+ "`IsNull` int(11) DEFAULT NULL, "
+			+ " PRIMARY KEY (`idRules`)"
+			+ ") ENGINE=InnoDB DEFAULT CHARSET=latin1;";
+    public static final String DB_TABLE_TRUNCATE_QUERY = "TRUNCATE `RuleDB`.`Rules`;";
 }

@@ -21,9 +21,7 @@ import com.simpleruleengine.Rule;
 public class DBConnectionManager {
     // JDBC driver name and database URL
 	
-
-
-    /**
+   /**
      * Used for insert queries
      * @param insertQuery
      * @return 
@@ -38,18 +36,20 @@ public class DBConnectionManager {
             Class.forName(Constants.JDBC_DRIVER);
 
             //STEP 3: Open a connection
-            System.out.println("Connecting to database...");
+            //System.out.println("Connecting to database...");
             conn = DriverManager.getConnection(Constants.DB_URL, Constants.DB_USER, 
                     Constants.DB_PASS);
 
             //STEP 4: Execute a query
-            System.out.println("Creating statement...");
+            //System.out.println("Creating statement...");
             stmt = conn.createStatement();
-            int result = stmt.executeUpdate(insertQuery);
+            stmt.executeUpdate(insertQuery);
+            /*int result = stmt.executeUpdate(insertQuery);
             if (result == 0)
             {
             	throw new Exception("Issues with updates");
             }
+            */
             //STEP 6: Clean-up environment
             stmt.close();
             conn.close();
@@ -77,7 +77,7 @@ public class DBConnectionManager {
                 System.out.println(se.getMessage());
             }//end finally try
         }//end try
-        System.out.println("Goodbye!");
+        
         return Constants.DB_CONN_ERR;
     }
     
@@ -93,16 +93,14 @@ public class DBConnectionManager {
             Class.forName(Constants.JDBC_DRIVER);
 
             //STEP 3: Open a connection
-            System.out.println("Connecting to database...");
+            //System.out.println("Connecting to database...");
             conn = DriverManager.getConnection(Constants.DB_URL, Constants.DB_USER, 
                     Constants.DB_PASS);
 
             //STEP 4: Execute a query
-            System.out.println("Creating statement...");
+            //System.out.println("Creating statement...");
             stmt = conn.createStatement();
-            String sql;
-            sql = "SELECT * FROM Rules";
-            ResultSet rs = stmt.executeQuery(sql);
+            ResultSet rs = stmt.executeQuery("SELECT * FROM Rules");
 
             //STEP 5: Extract data from result set
             while (rs.next()) {
@@ -190,24 +188,19 @@ public class DBConnectionManager {
             Class.forName(Constants.JDBC_DRIVER);
 
             //STEP 3: Open a connection
-            System.out.println("Connecting to database...");
+            //System.out.println("Connecting to database...");
             conn = DriverManager.getConnection(Constants.DB_URL, Constants.DB_USER, 
                     Constants.DB_PASS);
 
             //STEP 4: Execute a query
-            System.out.println("Creating statement...");
+            //System.out.println("Creating statement...");
             stmt = conn.createStatement();
-            String sql;
-            sql = "SELECT max(idRules) FROM RuleDB.Rules;";
-            ResultSet rs = stmt.executeQuery(sql);
+            ResultSet rs = stmt.executeQuery("SELECT max(idRules) FROM RuleDB.Rules;");
 
             //STEP 5: Extract data from result set
             if (rs.next()) {
                 //Retrieve by column name
                 id = rs.getLong(1);
-
-                //Display values
-                System.out.print("idRules: " + id);
             }
             else
             {

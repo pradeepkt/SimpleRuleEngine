@@ -3,6 +3,7 @@
  */
 package com.simpleruleengine;
 
+import java.util.ArrayList;
 import java.util.Hashtable;
 import com.simpleruleengine.utils.Constants;
 import com.simpleruleengine.utils.DBConnectionManager;
@@ -26,20 +27,23 @@ public class RuleManager {
 		initialize();
 	}
 	
+	/**
+	 * Initialize the cache with the rules from DB
+	 */
 	private void initialize()
 	{
 		_ruleSet = DBConnectionManager.getAllRules();
 	}
 	
+	/**
+	 * Display the set of rules.
+	 */
 	public void displayRules()
 	{
 		for (Rule curr_Rule:_ruleSet.values())
 		{
             //Display values
-            System.out.print("idRules: " + curr_Rule.getId());
-            System.out.print(", Attr_name: " + curr_Rule.getAttrName());
-            System.out.print(", Operation: " + curr_Rule.getOperator().toString());
-            System.out.print(", Threshold_Val: " + curr_Rule.getThreshold());
+			curr_Rule.displayRule();
 		}
 	}
 	
@@ -92,7 +96,7 @@ public class RuleManager {
 			System.out.println("Something wrong with max id");
 			return;
 		}
-		System.out.println("The max ID is "+ maxID);
+		//System.out.println("The max ID is "+ maxID);
 		String built = "INSERT INTO `RuleDB`.`Rules` "
 				+ "(`idRules`, `Attr_name`, `Operation`, `Threshold_Val`, `IsNull`) VALUES ("
 				+ "'" + (maxID+1) + "', "
@@ -100,7 +104,7 @@ public class RuleManager {
 				+ rule.getOperator().getCode() + ", " 
 			    + "'" + rule.getThreshold().toString() + "', " 
 			    + "'0')"; 
-		System.out.println("the insert query "+built);
+		//System.out.println("the insert query "+built);
 		long result = DBConnectionManager.persist(built);
 		if (result != Constants.SUCCESS)
 		{
@@ -108,5 +112,42 @@ public class RuleManager {
 		}
 		return;
 	}
+	
+	/**
+	 * Get the list of rules with matching attribute name
+	 * @param wildCard
+	 * @return
+	 */
+	public ArrayList<Rule> getRulesByName(String wildCard)
+	{
+		ArrayList<Rule> list = new ArrayList<Rule>();
+		for (Rule currentRule:_ruleSet.values())
+		{
+			if (currentRule.getAttrName().contains(wildCard)) 
+			{
+				list.add(currentRule);
+			}
+		}
+		return list;
+	}
+	
+	/**
+	 * Get the list of rules with matching Operator
+	 * @param operatorCard
+	 * @return
+	 */
+	public ArrayList<Rule> getRulesByOperator(Operators operatorCard)
+	{
+		ArrayList<Rule> list = new ArrayList<Rule>();
+		for (Rule currentRule:_ruleSet.values())
+		{
+			if (currentRule.getOperator() == operatorCard) 
+			{
+				list.add(currentRule);
+			}
+		}
+		return list;
+	}
+	
 
 }

@@ -117,5 +117,14 @@ public final class Rule {
 		}
 		return engine.compare(compare, _threshold, _oper);
 	}
+	
+	/**
+	 * Display the rule details
+	 */
+	public void displayRule()
+	{
+        System.out.println(_id + " : " + _attrName + " "
+        		+ _oper.toString() + " " + _threshold);
+	}
 
 }
