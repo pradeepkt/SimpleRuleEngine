@@ -5,6 +5,8 @@ package com.simpleruleengine;
 
 import java.util.Date;
 
+import com.simpleruleengine.utils.OperatorMismatchException;
+
 /**
  * @author z0027pb
  *
@@ -15,15 +17,15 @@ public class DateComparator implements BasicRuleEngine {
 	 * @see com.simpleruleengine.BasicRuleEngine#compare(java.lang.Object, java.lang.Object, com.simpleruleengine.Operators)
 	 */
 	@Override
-	public boolean compare(Object val1, Object val2, Operators operation) {
+	public boolean compare(Object val1, Object val2, Operators operation) throws OperatorMismatchException {
 		
 		if (!(val1 instanceof Date) || !(val2 instanceof Date))
 		{
 			// Type check for the LHS and RHS
-			System.out.println("This is NOT Date");
-			return false;
+			throw new OperatorMismatchException("This is NOT Date");
 		}
-		System.out.println("Comparing " + ((Date)val1).toString() + " & " + ((Date)val2).toString());
+		System.out.println("Comparing " + ((Date)val1).toString() + " " + operation.toString() + " "
+							+ ((Date)val2).toString());
 		switch (operation)
 		{
 		case DATE_EARLIER_THAN:

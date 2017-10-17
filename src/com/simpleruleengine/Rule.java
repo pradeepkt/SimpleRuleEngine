@@ -4,6 +4,9 @@
 package com.simpleruleengine;
 
 import java.sql.Date;
+import java.util.Calendar;
+
+import com.simpleruleengine.utils.OperatorMismatchException;
 
 /**
  * @author z0027pb
@@ -128,6 +131,26 @@ public final class Rule {
 		_attrName = attr;
 		_oper = op;
 		_threshold = thresh;
+		_createdBy = "";
+		_createdDate = new Date(Calendar.getInstance().getTime().getTime());
+		_lastModifiedBy = "";
+		_lastModifiedDate = new Date(Calendar.getInstance().getTime().getTime());
+	}
+	
+	/**
+	 * Copy the rule parameters
+	 * @param newRule
+	 */
+	public void copyRule(Rule newRule)
+	{
+		_id = newRule.getId();
+		_attrName = newRule.getAttrName();
+		_oper = newRule.getOperator();
+		_threshold = newRule.getThreshold();
+		_createdBy = newRule.getCreatedBy();
+		_createdDate = newRule.getCreatedDate();
+		_lastModifiedBy = newRule.getLastModifiedBy();
+		_lastModifiedDate = newRule.getLastModifiedDate();
 	}
 	
 	/**
@@ -141,7 +164,7 @@ public final class Rule {
 		_threshold = new Object();
 	}
 	
-	public boolean evaluateRule(Object compare)
+	public boolean evaluateRule(Object compare) throws OperatorMismatchException
 	{
 		BasicRuleEngine engine;
 		int operCode = _oper.getCode();

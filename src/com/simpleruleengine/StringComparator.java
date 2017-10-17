@@ -3,6 +3,8 @@
  */
 package com.simpleruleengine;
 
+import com.simpleruleengine.utils.OperatorMismatchException;
+
 /**
  * @author z0027pb
  *
@@ -13,13 +15,12 @@ public class StringComparator implements BasicRuleEngine {
 	 * @see com.simpleruleengine.BasicRuleEngine#compare(java.lang.Object, java.lang.Object, int)
 	 */
 	@Override
-	public boolean compare(Object val1, Object val2, Operators operation) {
+	public boolean compare(Object val1, Object val2, Operators operation) throws OperatorMismatchException {
 
 		if (!(val1 instanceof String)) // (val1.getClass().isInstance(String.class))
 		{
 			// Type check for the LHS and RHS
-			System.out.println("This is NOT string");
-			return false;
+			throw new OperatorMismatchException("This is NOT string");
 		}
 		switch (operation)
 		{

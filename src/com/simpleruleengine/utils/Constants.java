@@ -44,4 +44,8 @@ public final class Constants {
 			+ "PRIMARY KEY (`idRules`)"
 			+ ") ENGINE=InnoDB DEFAULT CHARSET=latin1;";
     public static final String DB_TABLE_TRUNCATE_QUERY = "TRUNCATE `RuleDB`.`Rules`;";
+    
+    public static final int ADD_RULE = 1;
+    public static final int MOD_RULE = 2;
+    public static final int DEL_RULE = 3;
 }

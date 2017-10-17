@@ -3,6 +3,7 @@
  */
 
 package com.simpleruleenginetest;
+import java.util.ArrayList;
 import java.util.Date;
 
 import com.simpleruleengine.Operators;
@@ -10,6 +11,7 @@ import com.simpleruleengine.Rule;
 import com.simpleruleengine.RuleManager;
 import com.simpleruleengine.utils.Constants;
 import com.simpleruleengine.utils.DBConnectionManager;
+import com.simpleruleengine.utils.OperatorMismatchException;
 
 /**
  * @author z0027pb
@@ -59,7 +61,7 @@ public class SimpleRuleEngineUnitTest {
 
 		rules.displayRules();
 		
-		/*
+		
 		ArrayList<Rule> rulesbyname = rules.getRulesByName("myatr");
 		System.out.println("Rules matching myatr");
 		for (Rule currentRule: rulesbyname)
@@ -71,16 +73,31 @@ public class SimpleRuleEngineUnitTest {
 		for (Rule currentRule: rulesbyop)
 		{
 			currentRule.displayRule();
-			if (currentRule.evaluateRule(new Date(1500748200000L)))
+			try
 			{
-				System.out.println("True");
+				if (currentRule.evaluateRule(new Date(1500748200000L)))
+				{
+					System.out.println("True");
+				}
+				else
+				{
+					System.out.println("False");
+				}
+				currentRule.evaluateRule(3000L);
 			}
-			else
+			catch (OperatorMismatchException ex)
 			{
-				System.out.println("False");
+				System.out.println(ex.toString());
 			}
 		}
-		*/
+		
+		Rule currRule;
+		currRule = rules.getRuleById(2L);
+		currRule.setCreatedBy("PradeepKumar.Arasan");
+		rules.ModRule(currRule);
+		
+		currRule = rules.getRuleById(10);
+		rules.DelRule(currRule);
 
 	}
 
